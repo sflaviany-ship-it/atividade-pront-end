@@ -1,1 +1,42 @@
-https://drive.google.com/file/d/1glfRyz1GgltXBMrOjo45pNMRlCehQU5C/view?usp=drivesdk
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Página</title>
+</head>
+<body>
+
+    <!-- Menu / Cabeçalho -->
+    <div>
+        <img src="caminho-da-imagem.jpg" alt="descrição da imagem">
+
+        <input type="text" placeholder="Pesquisar...">
+
+        <button>Início</button>
+        <button>Contatos</button>
+        <button>Login</button>
+        <button>Criar conta</button>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div>
+        <h1>Título da página</h1>
+
+        <img src="caminho-da-imagem.jpg" alt="descrição">
+
+        <p>Texto</p>
+    </div>
+
+    <!-- Links -->
+    <div>
+        <a href="#">Política e Termos</a><br>
+        <a href="#">Instagram</a><br>
+        <a href="#">Informações do serviço</a><br>
+        <a href="#">Contato do WhatsApp</a>
+
+        <p>Texto 1</p>
+        <p>Texto 2</p>
+    </div>
+
+</body>
+</html>
