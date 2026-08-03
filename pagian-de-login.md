@@ -1,46 +1,37 @@
-  <!DOCTYPE html>
-<html lang="pt-br">
+  <html>
+<img src="https://i.imgur.com/VC44zJJ.png">
 
-<head>
-    <meta charset="UTF-8">
-    <title>CalmaMente</title>
-</head>
+<div class="login h2">
+  <h2 style="color: #A6A65A;">Bem vindo de volta!</h2>
+</div>
 
-<body>
+<div class="texto-login">
+  <p>Faça login para continuar</p>
+</div>
 
-<header>
+ <h2>E-mail</h2>
 
-     <img src="https://i.imgur.com/VC44zJJ.png">
+<input type="email" placeholder="Digite seu email">
 
-   </header>
+  <h2>Senha</h2>
 
-   <section class="login">
-    <div class="imagem-login">
-       <img src="https://i.imgur.com/XIDq9Z5.png"> 
-    </div>
+<input type="password" placeholder="Digite sua senha">
 
-    <div class="login h2">
-      <h2 style="color: #00ff00;">Bem vindo de volta!</h2>
-    </div>
-
-    <div class="texto-login">
-      <p>Faça login para continuar</p>
-    </div>
-
-    <h2>E-mail</h2>
-
-    <input type="digite seu e-mail">
-
-
-
-   </section>
-   
-</body>
-
-<style>
-.login h2{
-
+  <div class= "esqueci a senha">
+<button>esqueci minha senha</button>
+  </div>
+<button>Entrar</button>
   
+<style> 
+  .login h2{
+   background-color: #f8f4ef
+} 
+  
+  body {
+    background-color: #f8f4ef;
 }
 
 </style>
+
+</html>
+   
