@@ -1,4 +1,4 @@
-  <html>
+<html>
 <img src="https://i.imgur.com/VC44zJJ.png">
 
 <div class="login h2">
@@ -17,21 +17,42 @@
 
 <input type="password" placeholder="Digite sua senha">
 
-  <div class= "esqueci a senha">
-<button>esqueci minha senha</button>
+  <div class= "esqueci">
+<p>esqueci minha senha</p>
   </div>
+  
+  <div class= "entrar">
 <button>Entrar</button>
+  </div>
+
+  <p>ou</p>
+
+  <button>Continuar com o google</button>
+  <p>Não tem uma conta </p>
+  <button>Criar conta</button>
   
 <style> 
   .login h2{
    background-color: #f8f4ef
 } 
   
-  body {
-    background-color: #f8f4ef;
+  .body {
+  background-color: #f8f4ef
 }
+  .esqueci p {
+  color: #c0715d
+  
+    
+}
+  .entrar button {
+    background-color: c0715d
+    color: #FFFFFF
+    }
+  
 
 </style>
 
 </html>
+  
+ 
    
