@@ -88,7 +88,7 @@
 
   .conta{
     border: solid 1px rgba(255, 255, 255, 0);
-    background-color: #FFFFFF;
+    background-color: #f8f4ef;
     color: #c0715d;
   }
     
@@ -98,7 +98,3 @@
   }
 </style>
 </html>
-
-  
- 
-   
