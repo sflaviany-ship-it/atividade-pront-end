@@ -1,100 +1,231 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalmaMente - Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-<img src="https://i.imgur.com/VC44zJJ.png">
+        body {
+            background-color: #f6efe6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
 
-<div class="container-login">
+        .desktop-container {
+            width: 100%;
+            max-width: 1100px;
+            height: 85vh;
+            min-height: 620px;
+            border-radius: 16px;
+            padding: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
 
-  <div class="login h2">
-    <h2 style="color: #A6A65A;">Bem vindo de volta!</h2>
-  </div>
 
-  <div class="texto-login">
-    <p>Faça login para continuar</p>
-  </div>
+        .login-card {
+            width: 100%;
+            max-width: 340px;
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 16px;
+            border: 1px solid #ebdccb;
+            text-align: center;
+        }
 
-  <h2>E-mail</h2>
 
-  <div class="email">
-    <input type="email" placeholder="Digite seu email">
-  </div>
-  
-  <h2>Senha</h2>
+        .brand-logo-center {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-  <input type="password" placeholder="Digite sua senha">
+        .brand-logo-center img {
+            height: 42px; 
+            display: block;
+        }
 
-  <div class="esqueci">
-    <p>esqueci minha senha</p>
-  </div>
+        .login-card h2 {
+            color: #595f51; 
+            font-size: 19px;
+            font-weight: 600;
+            margin: 0 0 6px 0;
+        }
+
+        .login-card .subtitle {
+            color: #9c9c9c;
+            font-size: 11px;
+            margin: 0 0 25px 0;
+        }
+
+        .input-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #6d7366;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper .icon {
+            position: absolute;
+            left: 12px;
+            font-size: 12px;
+            color: #a3a3a3;
+            user-select: none;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 10px 10px 10px 32px;
+            border: 1px solid #e3d3c4;
+            border-radius: 8px;
+            font-size: 13px;
+            background-color: #fdfcf9;
+            color: #444;
+            outline: none;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #c2beba;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #f39782;
+        }
+
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 4px;
+            margin-bottom: 22px;
+        }
+
+        .forgot-password a {
+            color: #f6947e;
+            font-size: 10px;
+            text-decoration: none;
+        }
+
+
+        .btn-submit {
+            width: 100%;
+            padding: 11px;
+            background-color: #f49681;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #e28570;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 12px 0;
+            font-size: 10px;
+            color: #b8b8b8;
+        }
+
+
+        .btn-google {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffffff;
+            color: #f49681;
+            border: 1px solid #e3d3c4;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-google:hover {
+            background-color: #fdfcf9;
+        }
+
+      
+        .google-icon {
+            font-weight: bold;
+            font-family: "Georgia", serif;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
     
-  <button class="entrar">Entrar</button>
+    <div class="desktop-container">
+        
+        <div class="login-card">
+            
+            <div class="brand-logo-center">
+                <img src="https://i.imgur.com/VC44zJJ.png" alt="CalmaMente Logo">
+            </div>
 
-  <p>ou</p>
+            <h2>Bem-vindo de volta!</h2>
+            <div class="subtitle">Faça login para continuar</div>
 
-  <button class="google">Continuar com o google</button>
-  
-  <p>Não tem uma conta </p>
-  
-  <button class="conta">Criar conta</button>
+            <div class="input-group">
+                <label>E-mail</label>
+                <div class="input-wrapper">
+                    <span class="icon">✉</span>
+                    <input type="email" placeholder="Digite seu e-mail">
+                </div>
+            </div>
 
-</div>
+            <div class="input-group">
+                <label>Senha</label>
+                <div class="input-wrapper">
+                    <span class="icon">🔒</span>
+                    <input type="password" placeholder="Digite sua senha">
+                </div>
+            </div>
 
-<style> 
-  body {
-    background-color: #f8f4ef;
-    display: flex;
-    flex-direction: column;
-    align-items: center;      
-    justify-content: center;   
-    min-height: 100vh;        
-    margin: 0;
-    font-family: sans-serif;
-  }
+            <div class="forgot-password">
+                <a href="#">Esqueci minha senha</a>
+            </div>
 
-  .container-login {
-    width: 100%;
-    max-width: 400px;         
-    display: flex;
-    flex-direction: column;   /
-  }
+            <button class="btn-submit">Entrar</button>
 
- 
-  .login h2{
-     background-color: #f8f4ef
-  } 
+            <div class="divider">ou</div>
 
-  .email{
-    width: 100%;
-    max-width: 400px;           
-    height: 45px;        
-    font-size: 16px;        
-    border-radius: 8px;     
-    border: 1px solid #cccccc00; 
-    box-sizing: border-box; 
-  }
+            <button class="btn-google">
+                <span class="google-icon">G</span> Continuar com Google
+            </button>
+        </div>
 
-  .esqueci p {
-    color: #c0715d
-  }
+    </div>
 
-  .entrar {
-    border: solid 1px rgba(255, 255, 255, 0);
-    background-color: #c0715d;
-    color: #FFFFFF;
-    padding: 15px 30px; 
-    font-size: 18px;
-    border-radius: 8px;
-  }
-
-  .conta{
-    border: solid 1px rgba(255, 255, 255, 0);
-    background-color: #f8f4ef;
-    color: #c0715d;
-  }
-    
-  .google{
-    padding: 15px 30px; 
-    font-size: 18px;
-  }
-</style>
+</body>
 </html>
