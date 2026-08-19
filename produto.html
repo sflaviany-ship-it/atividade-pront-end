@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmaMente</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f4f1e9;
+      color: #4c5144;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      height: 72px;
+      background: #f4f1e9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid #e3dfd2;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #68745b;
+      font-weight: bold;
+    }
+
+    .logo span {
+      font-size: 22px;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #55594f;
+      font-size: 12px;
+    }
+
+    nav a:hover {
+      color: #68745b;
+    }
+
+    .login {
+      border: 1px solid #68745b;
+      border-radius: 20px;
+      padding: 9px 16px;
+      color: #68745b;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      width: 86%;
+      margin: 0 auto;
+      min-height: 275px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      width: 55%;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: normal;
+      color: #59634f;
+      margin-bottom: 12px;
+    }
+
+    .heart {
+      color: #d47b5c;
+      font-size: 25px;
+    }
+
+    .hero-text p {
+      font-size: 12px;
+      line-height: 1.7;
+      color: #77796f;
+      max-width: 500px;
+    }
+
+    .hero-decoration {
+      width: 300px;
+      height: 210px;
+      position: relative;
+    }
+
+    .blob {
+      position: absolute;
+      width: 210px;
+      height: 150px;
+      background: #d9d1b8;
+      border-radius: 50% 35% 50% 40%;
+      right: 20px;
+      top: 20px;
+    }
+
+    .plant {
+      position: absolute;
+      right: 85px;
+      top: 15px;
+      font-size: 70px;
+      transform: rotate(-10deg);
+      z-index: 2;
+    }
+
+    .speech {
+      position: absolute;
+      right: 55px;
+      top: 95px;
+      width: 90px;
+      height: 55px;
+      background: #d17d5c;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      z-index: 3;
+    }
+
+    /* ================= CONTENT ================= */
+
+    .content {
+      width: 86%;
+      margin: 0 auto;
+    }
+
+    .top-area {
+      display: grid;
+      grid-template-columns: 1fr 270px;
+      gap: 22px;
+    }
+
+    /* SEARCH */
+
+    .search-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .search {
+      flex: 1;
+      background: white;
+      border: 1px solid #dedbd0;
+      border-radius: 20px;
+      height: 40px;
+      padding: 0 16px;
+      color: #777;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .filter {
+      background: white;
+      border: 1px solid #dedbd0;
+      border-radius: 20px;
+      padding: 0 17px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    /* BUTTON */
+
+    .green-button {
+      border: none;
+      background: #68745b;
+      color: white;
+      border-radius: 20px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 11px;
+      transition: .2s;
+    }
+
+    .green-button:hover {
+      background: #566149;
+      transform: translateY(-1px);
+    }
+
+    /* ================= QUESTIONS ================= */
+
+    .questions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .question {
+      min-height: 72px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #e4e0d5;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      gap: 13px;
+    }
+
+    .question-icon {
+      min-width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      background: #d9dfc9;
+    }
+
+    .question:nth-child(2) .question-icon {
+      background: #d7d9c4;
+    }
+
+    .question:nth-child(3) .question-icon {
+      background: #d67e5b;
+    }
+
+    .question:nth-child(4) .question-icon {
+      background: #b7bd8e;
+    }
+
+    .question-content {
+      flex: 1;
+    }
+
+    .question-content h3 {
+      font-size: 12px;
+      color: #52594b;
+      margin-bottom: 5px;
+    }
+
+    .question-content p {
+      font-size: 9px;
+      line-height: 1.5;
+      color: #8a8b82;
+    }
+
+    .question-actions {
+      display: flex;
+      gap: 8px;
+      color: #85887d;
+      font-size: 12px;
+    }
+
+    /* ================= SIDEBAR ================= */
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .side-card {
+      background: white;
+      border: 1px solid #e3dfd3;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .side-card h2 {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      color: #59634f;
+      margin-bottom: 8px;
+    }
+
+    .side-card p {
+      font-size: 9px;
+      line-height: 1.5;
+      color: #85867e;
+      margin-bottom: 12px;
+    }
+
+    .side-card label {
+      display: block;
+      font-size: 10px;
+      margin: 9px 0 4px;
+      color: #66695e;
+    }
+
+    select,
+    .side-input {
+      width: 100%;
+      height: 29px;
+      border: 1px solid #ddd9ce;
+      border-radius: 6px;
+      background: #faf9f5;
+      padding: 0 8px;
+      font-size: 9px;
+      color: #777;
+    }
+
+    .side-card .green-button {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* ================= BOTTOM ================= */
+
+    .bottom-section {
+      margin: 25px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .bottom-card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e2ded2;
+      padding: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 95px;
+    }
+
+    .bottom-card h2 {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      color: #5b654f;
+      margin-bottom: 6px;
+    }
+
+    .bottom-card p {
+      font-size: 9px;
+      color: #85867d;
+      max-width: 300px;
+      line-height: 1.5;
+    }
+
+    .bottom-icon {
+      font-size: 45px;
+      margin-left: 15px;
+    }
+
+    /* ================= FEATURES ================= */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px 0 30px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #d9dfca;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+
+    .feature h3 {
+      font-size: 10px;
+      color: #5e6556;
+      margin-bottom: 3px;
+    }
+
+    .feature p {
+      font-size: 8px;
+      color: #8b8d84;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #657258;
+      color: white;
+      min-height: 80px;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: Georgia, serif;
+      font-size: 15px;
+    }
+
+    footer p {
+      font-size: 8px;
+      opacity: .8;
+      margin-top: 5px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      font-size: 9px;
+    }
+
+    .social {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social span {
+      width: 25px;
+      height: 25px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    /* ================= RESPONSIVO ================= */
+
+    @media (max-width: 800px) {
+
+      header {
+        padding: 0 4%;
+      }
+
+      nav {
+        gap: 10px;
+      }
+
+      nav a {
+        display: none;
+      }
+
+      .hero,
+      .content {
+        width: 92%;
+      }
+
+      .hero-text {
+        width: 100%;
+      }
+
+      .hero-text h1 {
+        font-size: 30px;
+      }
+
+      .hero-decoration {
+        display: none;
+      }
+
+      .top-area {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bottom-section {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .search-area {
+        flex-direction: column;
+      }
+
+      .filter {
+        height: 38px;
+      }
+
+      .question {
+        align-items: flex-start;
+      }
+
+      .question-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <div class="logo">
+        <span>🌿</span>
+        CalmaMente
+      </div>
+
+      <nav>
+        <a href="#">Início</a>
+        <a href="#">Trilhas</a>
+        <a href="#">Diário</a>
+        <a href="#">Comunidade</a>
+        <a href="#">Sobre</a>
+        <button class="login" onclick="entrar()">♡ Minha conta</button>
+      </nav>
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-text">
+        <h1>
+          Você não está sozinho.
+          <span class="heart">♡</span>
+        </h1>
+
+        <p>
+          Aqui, cada conversa pode ser um pequeno passo para
+          entender melhor seus sentimentos, cuidar de si mesmo
+          e encontrar um pouco mais de calma. Que bom ter você aqui.
+        </p>
+      </div>
+
+      <div class="hero-decoration">
+        <div class="blob"></div>
+        <div class="plant">🌿</div>
+        <div class="speech">•••</div>
+      </div>
+
+    </section>
+
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <div class="top-area">
+
+        <!-- ESQUERDA -->
+        <section>
+
+          <div class="search-area">
+            <input
+              type="text"
+              class="search"
+              id="searchInput"
+              placeholder="🔍 Buscar por sentimentos ou assuntos..."
+              onkeyup="buscar()"
+            >
+
+            <button class="filter">☰ Filtros</button>
+
+            <button class="green-button" onclick="novaReflexao()">
+              + Compartilhar minha experiência
+            </button>
+          </div>
+
+
+          <div class="questions" id="questions">
+
+            <article class="question">
+              <div class="question-icon">🌳</div>
+
+              <div class="question-content">
+                <h3>
+                  Como saber se estou passando por uma fase difícil?
+                </h3>
+
+                <p>
+                  Às vezes é difícil entender o que estamos sentindo.
+                  Veja algumas formas de reconhecer esses sinais.
+                </p>
+              </div>
+
+              <div class="question-actions">
+                ♡　💬
+              </div>
+            </article>
+
+
+            <article class="question">
+              <div class="question-icon">🌿</div>
+
+              <div class="question-content">
+                <h3>
+                  O que fazer quando a cabeça fica acelerada?
+                </h3>
+
+                <p>
+                  Pequenas pausas e algumas técnicas podem ajudar
+                  a organizar os pensamentos.
+                </p>
+              </div>
+
+              <div class="question-actions">
+                ♡　💬
+              </div>
+            </article>
+
+
+            <article class="question">
+              <div class="question-icon">☀</div>
+
+              <div class="question-content">
+                <h3>
+                  Atualmente eu preciso de ajuda mas tenho medo...
+                </h3>
+
+                <p>
+                  Pedir ajuda é um ato de coragem. Você não precisa
+                  passar por tudo sozinho.
+                </p>
+              </div>
+
+              <div class="question-actions">
+                ♡　💬
+              </div>
+            </article>
+
+
+            <article class="question">
+              <div class="question-icon">♡</div>
+
+              <div class="question-content">
+                <h3>
+                  Quando pedir ajuda profissional?
+                </h3>
+
+                <p>
+                  Conheça alguns sinais que podem indicar que conversar
+                  com um profissional seria importante.
+                </p>
+              </div>
+
+              <div class="question-actions">
+                ♡　💬
+              </div>
+            </article>
+
+          </div>
+
+        </section>
+
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+          <div class="side-card">
+
+            <h2>Leituras para você</h2>
+
+            <p>
+              Conteúdos selecionados para ajudar você
+              a entender melhor seus sentimentos.
+            </p>
+
+            <label>Escolha um assunto</label>
+
+            <select>
+              <option>Ansiedade</option>
+              <option>Estresse</option>
+              <option>Autoestima</option>
+              <option>Relacionamentos</option>
+              <option>Estudos</option>
+            </select>
+
+            <label>Como você está hoje?</label>
+
+            <select>
+              <option>Quero entender melhor</option>
+              <option>Estou preocupado(a)</option>
+              <option>Estou tranquilo(a)</option>
+              <option>Estou triste</option>
+            </select>
+
+            <button class="green-button" onclick="lerConteudo()">
+              Encontrar conteúdos
+            </button>
+
+          </div>
+
+
+          <div class="side-card">
+
+            <h2>Precisa conversar agora?</h2>
+
+            <p>
+              Encontre informações e formas seguras
+              de buscar ajuda quando precisar.
+            </p>
+
+            <button class="green-button" onclick="ajuda()">
+              Encontrar ajuda
+            </button>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+
+      <!-- BOTTOM CARDS -->
+      <section class="bottom-section">
+
+        <div class="bottom-card">
+
+          <div>
+            <h2>Seja responsável por cuidar de você.</h2>
+
+            <p>
+              Pequenos hábitos podem fazer parte de uma rotina
+              mais leve e saudável.
+            </p>
+
+            <br>
+
+            <button class="green-button" onclick="rotina()">
+              Conhecer minha rotina
+            </button>
+          </div>
+
+          <div class="bottom-icon">🌱</div>
+
+        </div>
+
+
+        <div class="bottom-card">
+
+          <div>
+            <h2>Um espaço para você.</h2>
+
+            <p>
+              Escreva, reflita e acompanhe seus sentimentos
+              ao longo do tempo.
+            </p>
+
+            <br>
+
+            <button class="green-button" onclick="diario()">
+              Abrir meu diário
+            </button>
+          </div>
+
+          <div class="bottom-icon">📖</div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FEATURES -->
+      <section class="features">
+
+        <div class="feature">
+
+          <div class="feature-icon">♡</div>
+
+          <div>
+            <h3>ESPAÇO SEGURO</h3>
+            <p>Um ambiente acolhedor para suas reflexões.</p>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">☀</div>
+
+          <div>
+            <h3>AUTOCUIDADO</h3>
+            <p>Ferramentas para ajudar na sua rotina.</p>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">📖</div>
+
+          <div>
+            <h3>INFORMAÇÃO</h3>
+            <p>Conteúdos simples para você aprender.</p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+      <div>
+        <div class="footer-logo">🌿 CalmaMente</div>
+        <p>Um espaço para cuidar da mente e do coração.</p>
+      </div>
+
+      <div class="footer-links">
+        <span>Privacidade</span>
+        <span>Termos</span>
+        <span>Contato</span>
+      </div>
+
+      <div class="social">
+        <span>◎</span>
+        <span>f</span>
+        <span>♪</span>
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    function entrar() {
+      window.location.href = "login.html";
+    }
+
+    function novaReflexao() {
+      alert("Área para compartilhar sua experiência.");
+    }
+
+    function lerConteudo() {
+      alert("Buscando conteúdos para você...");
+    }
+
+    function ajuda() {
+      alert("Aqui você poderá encontrar formas de buscar ajuda.");
+    }
+
+    function rotina() {
+      alert("Abrindo sua rotina de autocuidado...");
+    }
+
+    function diario() {
+      alert("Abrindo seu diário...");
+    }
+
+    function buscar() {
+
+      const input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+      const perguntas = document.querySelectorAll(".question");
+
+      perguntas.forEach(function(pergunta) {
+
+        const texto = pergunta.innerText.toLowerCase();
+
+        if (texto.includes(input)) {
+          pergunta.style.display = "flex";
+        } else {
+          pergunta.style.display = "none";
+        }
+
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
