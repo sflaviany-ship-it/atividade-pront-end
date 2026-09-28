@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmaMente - Compartilhar Relato</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f4f1e9;
+      color: #4c5144;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    header {
+      height: 72px;
+      background: #f4f1e9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid #e3dfd2;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #68745b;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .logo span {
+      font-size: 22px;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #55594f;
+      font-size: 12px;
+    }
+
+    nav a:hover {
+      color: #68745b;
+    }
+
+    .login {
+      border: 1px solid #68745b;
+      border-radius: 20px;
+      padding: 9px 16px;
+      color: #68745b;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .container {
+      width: 86%;
+      max-width: 780px;
+      margin: 30px auto;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #68745b;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* CARD DO FORMULÁRIO */
+    .post-card {
+      background: white;
+      border: 1px solid #e3dfd3;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      margin-bottom: 35px;
+    }
+
+    .post-card h1 {
+      font-family: Georgia, serif;
+      font-size: 26px;
+      color: #59634f;
+      font-weight: normal;
+      margin-bottom: 6px;
+    }
+
+    .post-card p {
+      font-size: 12px;
+      color: #85867e;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      color: #55594f;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #ddd9ce;
+      border-radius: 8px;
+      background: #faf9f5;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #4c5144;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    input[type="text"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #68745b;
+      background: #ffffff;
+    }
+
+    textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .row-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .anonymous-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .anonymous-check input {
+      accent-color: #68745b;
+      cursor: pointer;
+    }
+
+    .anonymous-check span {
+      font-size: 11px;
+      color: #77796f;
+    }
+
+    /* BOTÃO */
+    .green-button {
+      border: none;
+      background: #68745b;
+      color: white;
+      border-radius: 20px;
+      padding: 12px 24px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: .2s;
+      width: 100%;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .green-button:hover {
+      background: #566149;
+      transform: translateY(-1px);
+    }
+
+    /* SEÇÃO DE FEED / POSTAGENS */
+    .feed-title {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #59634f;
+      margin-bottom: 16px;
+    }
+
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .post-item {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e4e0d5;
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .post-icon {
+      min-width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      background: #d9dfc9;
+      flex-shrink: 0;
+    }
+
+    .post-content {
+      flex: 1;
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .post-author {
+      font-size: 11px;
+      font-weight: bold;
+      color: #52594b;
+    }
+
+    .post-tag {
+      font-size: 9px;
+      background: #f0ede4;
+      color: #68745b;
+      padding: 3px 8px;
+      border-radius: 12px;
+      border: 1px solid #e3dfd2;
+    }
+
+    .post-title {
+      font-size: 13px;
+      color: #4c5144;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .post-text {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #77796f;
+      margin-bottom: 10px;
+    }
+
+    .post-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #8b8d84;
+    }
+
+    .like-btn {
+      background: none;
+      border: none;
+      color: #d17d5c;
+      cursor: pointer;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #657258;
+      color: white;
+      min-height: 80px;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+
+    .footer-logo {
+      font-family: Georgia, serif;
+      font-size: 15px;
+    }
+
+    footer p {
+      font-size: 8px;
+      opacity: .8;
+      margin-top: 5px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      font-size: 9px;
+    }
+
+    .social {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social span {
+      width: 25px;
+      height: 25px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 600px) {
+      .row-group {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: 92%;
+      }
+
+      nav a {
+        display: none;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="logo">
+        <span>🌿</span>
+        CalmaMente
+      </a>
+
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="#">Trilhas</a>
+        <a href="#">Diário</a>
+        <a href="#">Comunidade</a>
+        <a href="#">Sobre</a>
+        <button class="login" onclick="alert('Opção de login')">♡ Minha conta</button>
+      </nav>
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+
+      <a href="index.html" class="back-link">← Voltar para o início</a>
+
+      <!-- CARD DO FORMULÁRIO -->
+      <section class="post-card">
+        <h1>Como foi o seu dia? <span style="color: #d17d5c;">♡</span></h1>
+        <p>Este é um espaço seguro. Compartilhe o que você viveu, o que sentiu ou uma reflexão simples. Escrever ajuda a esvaziar a mente.</p>
+
+        <form id="relatoForm" onsubmit="publicarRelato(event)">
+          
+          <div class="row-group">
+            <div class="form-group">
+              <label for="nome">Seu nome ou apelido</label>
+              <input type="text" id="nome" placeholder="Ex: Ana, Gui..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="sentimento">Como você se sentiu hoje?</label>
+              <select id="sentimento">
+                <option value="🌱 Em paz / Tranquilo(a)">🌱 Em paz / Tranquilo(a)</option>
+                <option value="💭 Reflexivo(a)">💭 Reflexivo(a)</option>
+                <option value="🌤 Esperançoso(a)">🌤 Esperançoso(a)</option>
+                <option value="🌧 Um pouco sobrecarregado(a)">🌧 Um pouco sobrecarregado(a)</option>
+                <option value="🧡 Agradecido(a)">🧡 Agradecido(a)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="titulo">Título do seu relato</label>
+            <input type="text" id="titulo" placeholder="Ex: Uma caminhada no fim da tarde, Um pequeno progresso..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="relato">Sua história / relato</label>
+            <textarea id="relato" placeholder="Sinta-se à vontade para escrever no seu tempo..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="anonymous-check">
+              <input type="checkbox" id="anonimo" onchange="toggleAnonimo()">
+              <span>Publicar como anônimo(a)</span>
+            </label>
+          </div>
+
+          <button type="submit" class="green-button">
+            Publicar meu relato 🌿
+          </button>
+
+        </form>
+      </section>
+
+      <!-- FEED DE RELATOS PUBLICADOS -->
+      <h2 class="feed-title">Relatos recentes da comunidade</h2>
+
+      <div class="posts-list" id="postsList">
+
+        <!-- Exemplo de post existente 1 -->
+        <article class="post-item">
+          <div class="post-icon">🌱</div>
+          <div class="post-content">
+            <div class="post-header">
+              <span class="post-author">Mariana S.</span>
+              <span class="post-tag">🌱 Em paz / Tranquilo(a)</span>
+            </div>
+            <div class="post-title">Consegui fazer uma pausa à tarde</div>
+            <p class="post-text">Hoje decidi desligar as notificações por 30 minutos e apenas tomar um chá olhando pela janela. Parece pouco, mas diminuiu muito meu ritmo mental.</p>
+            <div class="post-footer">
+              <span>Publicado há poucas horas</span>
+              <button class="like-btn" onclick="curtir(this)">♡ <span>4</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Exemplo de post existente 2 -->
+        <article class="post-item">
+          <div class="post-icon" style="background: #d67e5b; color: white;">🌧</div>
+          <div class="post-content">
+            <div class="post-header">
+              <span class="post-author">Anônimo(a)</span>
+              <span class="post-tag">🌧 Um pouco sobrecarregado(a)</span>
+            </div>
+            <div class="post-title">O dia foi cansativo, mas cheguei ao fim</div>
+            <p class="post-text">Muitas coisas acumuladas no trabalho. Escrever aqui ajuda a entender que amanha é um novo dia e posso recomeçar com calma.</p>
+            <div class="post-footer">
+              <span>Publicado hoje</span>
+              <button class="like-btn" onclick="curtir(this)">♡ <span>8</span></button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        <div class="footer-logo">🌿 CalmaMente</div>
+        <p>Um espaço para cuidar da mente e do coração.</p>
+      </div>
+
+      <div class="footer-links">
+        <span>Privacidade</span>
+        <span>Termos</span>
+        <span>Contato</span>
+      </div>
+
+      <div class="social">
+        <span>◎</span>
+        <span>f</span>
+        <span>♪</span>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Alterna o campo de nome quando a opção 'Anônimo' é marcada
+    function toggleAnonimo() {
+      const anonimoCheck = document.getElementById('anonimo');
+      const nomeInput = document.getElementById('nome');
+      
+      if (anonimoCheck.checked) {
+        nomeInput.value = '';
+        nomeInput.disabled = true;
+        nomeInput.placeholder = "Publicando anonimamente...";
+      } else {
+        nomeInput.disabled = false;
+        nomeInput.placeholder = "Ex: Ana, Gui...";
+      }
+    }
+
+    // Adiciona uma nova postagem na lista
+    function publicarRelato(e) {
+      e.preventDefault();
+
+      const nomeInput = document.getElementById('nome');
+      const anonimoCheck = document.getElementById('anonimo');
+      const sentimento = document.getElementById('sentimento').value;
+      const titulo = document.getElementById('titulo').value;
+      const relato = document.getElementById('relato').value;
+
+      const autor = anonimoCheck.checked ? "Anônimo(a)" : (nomeInput.value || "Anônimo(a)");
+      const emojiIcon = sentimento.split(' ')[0]; // Pega o primeiro emoji do select
+
+      // Cria a estrutura HTML do novo relato
+      const novopost = document.createElement('article');
+      novoPost.className = 'post-item';
+      novoPost.innerHTML = `
+        <div class="post-icon">${emojiIcon}</div>
+        <div class="post-content">
+          <div class="post-header">
+            <span class="post-author">${autor}</span>
+            <span class="post-tag">${sentimento}</span>
+          </div>
+          <div class="post-title">${titulo}</div>
+          <p class="post-text">${relato}</p>
+          <div class="post-footer">
+            <span>Publicado agora mesmo</span>
+            <button class="like-btn" onclick="curtir(this)">♡ <span>0</span></button>
+          </div>
+        </div>
+      `;
+
+      // Insere no topo do feed
+      const postsList = document.getElementById('postsList');
+      postsList.prepend(novoPost);
+
+      // Limpa o formulário
+      document.getElementById('relatoForm').reset();
+      nomeInput.disabled = false;
+      nomeInput.placeholder = "Ex: Ana, Gui...";
+      
+      alert('Seu relato foi publicado com sucesso! 🌿');
+    }
+
+    // Função simples de curtir relatos
+    function curtir(btn) {
+      const spanCount = btn.querySelector('span');
+      let count = parseInt(spanCount.innerText);
+      
+      if (!btn.classList.contains('liked')) {
+        count++;
+        btn.innerHTML = `♥ <span>${count}</span>`;
+        btn.style.fontWeight = 'bold';
+        btn.classList.add('liked');
+      } else {
+        count--;
+        btn.innerHTML = `♡ <span>${count}</span>`;
+        btn.style.fontWeight = 'normal';
+        btn.classList.remove('liked');
+      }
+    }
+  </script>
+
+</body>
+</html>
