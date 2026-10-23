@@ -17,11 +17,11 @@
 
     <nav>
         <button onclick="inicio()">Início</button>
-        <button onclick="mensagens()">Mensagens</a>
+        <button onclick="mensagens()">Mensagens</button>
         <button>Apoio</button>
         <button>Sobre</button>
         <button class="ajuda">Preciso de ajuda ♡</button>
-        <a href="login.html" class="login">☺</a>
+        <button onclick="login()" class="login">☺</button>
     </nav>
 
 </header>
@@ -280,6 +280,9 @@
     }
     function mensagens(){
         window.location.href = "postagens.html"
+    }
+    function login(){
+        window.location.href = "login.html"
     }
 </script>
 
