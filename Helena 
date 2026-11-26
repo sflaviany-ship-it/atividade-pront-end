@@ -1,779 +1,735 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#17142d">
-  <title>Our Little Universe ✦</title>
-  <style>
-    :root {
-      --night: #17142d;
-      --night-soft: #252044;
-      --lavender: #c9b7f4;
-      --pink: #f3c9e8;
-      --cream: #fff7f2;
-      --muted: #d8d0e8;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17142d">
+<title>Our Little Universe ✦</title>
 
-    * { box-sizing: border-box; }
+<style>
+:root {
+  --night: #17142d;
+  --lavender: #c9b7f4;
+  --pink: #f3c9e8;
+  --cream: #fff7f2;
+  --muted: #d8d0e8;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--cream);
+  background:
+    radial-gradient(ellipse at 18% 8%, rgba(166,126,211,.38), transparent 36%),
+    radial-gradient(ellipse at 88% 38%, rgba(199,128,184,.22), transparent 34%),
+    radial-gradient(ellipse at 50% 100%, rgba(105,83,157,.24), transparent 42%),
+    var(--night);
+  font-family: Georgia, "Times New Roman", serif;
+  min-height: 100vh;
+}
+button, a { font: inherit; }
+.stars, .stars::before, .stars::after {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background-image:
+    radial-gradient(2px 2px at 12% 18%, #fff 50%, transparent 60%),
+    radial-gradient(1px 1px at 35% 72%, #fff 50%, transparent 60%),
+    radial-gradient(2px 2px at 78% 26%, #f3c9e8 50%, transparent 60%),
+    radial-gradient(1px 1px at 88% 80%, #fff 50%, transparent 60%),
+    radial-gradient(1px 1px at 60% 54%, #c9b7f4 50%, transparent 60%);
+  background-size: 290px 260px;
+  opacity: .65;
+  animation: twinkle 5s ease-in-out infinite alternate;
+  z-index: 0;
+}
+.stars::before { transform: translate(40px,30px); opacity: .35; }
+.stars::after { transform: translate(-30px,70px); opacity: .25; }
+@keyframes twinkle {
+  from { opacity: .25; }
+  to { opacity: .8; }
+}
+header, main, footer { position: relative; z-index: 1; }
+header {
+  display: flex;
+  justify-content: center;
+  padding: 22px 16px;
+}
+.brand {
+  color: var(--pink);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font: 11px Arial, sans-serif;
+}
+.hero {
+  min-height: 78vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 48px 22px 72px;
+}
+.hero-inner { max-width: 650px; }
+.moon {
+  font-size: clamp(58px,13vw,92px);
+  display: block;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 0 22px rgba(226,204,255,.55));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.eyebrow, .section-kicker {
+  color: var(--lavender);
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font: 10px Arial, sans-serif;
+}
+.eyebrow { letter-spacing: .22em; }
+h1 {
+  font-size: clamp(40px,10vw,76px);
+  font-weight: normal;
+  line-height: 1.04;
+  margin: 14px 0;
+}
+h1 em { color: var(--pink); font-weight: normal; }
+.intro {
+  color: var(--muted);
+  font: 15px/1.8 Arial, sans-serif;
+  max-width: 460px;
+  margin: 0 auto 28px;
+}
+.button {
+  border: 1px solid rgba(243,201,232,.65);
+  background: rgba(243,201,232,.12);
+  color: var(--cream);
+  border-radius: 999px;
+  padding: 13px 23px;
+  cursor: pointer;
+  transition: .25s ease;
+}
+.button:hover {
+  background: rgba(243,201,232,.24);
+  transform: translateY(-2px);
+}
+section {
+  width: min(850px,calc(100% - 36px));
+  margin: 0 auto;
+  padding: 62px 0;
+  scroll-margin-top: 20px;
+}
+.section-kicker { text-align: center; }
+h2 {
+  text-align: center;
+  font-size: clamp(30px,7vw,43px);
+  font-weight: normal;
+  margin: 12px 0 28px;
+}
+.letter-card, .note-card {
+  background: linear-gradient(145deg,rgba(255,224,246,.13),rgba(201,183,244,.055));
+  border: 1px solid rgba(243,201,232,.28);
+  border-radius: 22px;
+  padding: clamp(22px,6vw,38px);
+  box-shadow: 0 18px 60px rgba(0,0,0,.15);
+  backdrop-filter: blur(8px);
+}
+.envelope {
+  display: block;
+  margin: 0 auto 18px;
+  font-size: 48px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform .25s;
+}
+.envelope:hover { transform: rotate(-7deg) scale(1.08); }
+.letter-text {
+  display: none;
+  color: #f3eaf8;
+  font: 15px/1.95 Arial, sans-serif;
+  text-align: left;
+  white-space: pre-line;
+}
+.letter-text.visible { display: block; animation: appear .6s ease; }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hint {
+  color: var(--muted);
+  text-align: center;
+  font: 13px Arial, sans-serif;
+}
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 14px;
+}
+.memory {
+  min-height: 150px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(220,202,255,.16);
+}
+.memory span { font-size: 30px; display: block; margin-bottom: 10px; }
+.memory p { color: var(--muted); font: 13px/1.6 Arial,sans-serif; margin: 0; }
+.sky {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+}
+.star-button {
+  min-height: 112px;
+  border: 1px solid rgba(220,202,255,.18);
+  border-radius: 18px;
+  background: rgba(255,255,255,.055);
+  color: var(--cream);
+  cursor: pointer;
+  padding: 14px 8px;
+  transition: .25s;
+}
+.star-button:hover {
+  background: rgba(201,183,244,.16);
+  transform: translateY(-3px);
+}
+.star-button strong { display: block; font-size: 28px; margin-bottom: 8px; }
+.star-button small { color: var(--muted); font: 11px Arial,sans-serif; }
+.reveal {
+  min-height: 54px;
+  text-align: center;
+  color: var(--pink);
+  font: italic 17px/1.6 Georgia,serif;
+  margin: 22px 0 0;
+}
+.playlist-card {
+  display: grid;
+  grid-template-columns: minmax(130px,.8fr) 1.2fr;
+  gap: 22px;
+  align-items: center;
+  padding: 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(243,201,232,.25);
+  background: linear-gradient(135deg,rgba(201,183,244,.15),rgba(243,201,232,.07));
+}
+.playlist-art {
+  min-height: 190px;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(255,255,255,.28),transparent 28%),
+    linear-gradient(145deg,#9d82c9,#5e4b83 58%,#302747);
+  box-shadow: inset 0 0 30px rgba(255,255,255,.12);
+}
+.playlist-art span { font-size: 66px; color: #fff1fb; text-shadow: 0 0 25px #f3c9e8; }
+.playlist-art i, .playlist-art b { position: absolute; color: #fce4f5; font-style: normal; }
+.playlist-art i { top: 18px; left: 20px; font-size: 23px; }
+.playlist-art b { right: 20px; bottom: 15px; font-size: 28px; }
+.playlist-overline {
+  color: var(--lavender);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font: 10px Arial,sans-serif;
+}
+.playlist-info h3 { font-size: 28px; font-weight: normal; margin: 8px 0; }
+.playlist-info > p:not(.playlist-overline) {
+  color: var(--muted);
+  font: 13px/1.7 Arial,sans-serif;
+  margin-bottom: 18px;
+}
+.playlist-link {
+  display: inline-block;
+  text-decoration: none;
+  font: 13px Arial,sans-serif;
+}
+.spotify-embed {
+  display: block;
+  width: 100%;
+  height: 352px;
+  border: 0;
+  border-radius: 12px;
+  margin-top: 18px;
+}
+.memories-section { padding-bottom: 76px; }
+.memories-intro { max-width: 470px; margin: -10px auto 24px; line-height: 1.7; }
+.memory-form {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(243,201,232,.24);
+  background: rgba(255,255,255,.055);
+}
+.upload-label {
+  min-height: 230px;
+  border: 1px dashed rgba(243,201,232,.5);
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--cream);
+  background: rgba(243,201,232,.045);
+  padding: 15px;
+}
+.upload-label:hover { background: rgba(243,201,232,.1); }
+.upload-symbol { font: 36px Arial,sans-serif; color: var(--pink); }
+.upload-label strong { font-size: 15px; font-weight: normal; }
+.upload-label small { color: var(--muted); font: 11px Arial,sans-serif; }
+.form-fields { display: flex; flex-direction: column; gap: 8px; }
+.form-fields label { color: var(--lavender); font: 11px Arial,sans-serif; margin-top: 3px; }
+.form-fields input, .form-fields textarea, .form-fields select {
+  width: 100%;
+  border: 1px solid rgba(220,202,255,.2);
+  border-radius: 11px;
+  background: rgba(15,12,31,.5);
+  color: var(--cream);
+  padding: 11px 12px;
+  font: 13px Arial,sans-serif;
+  outline: none;
+}
+.form-fields textarea { resize: vertical; }
+.form-fields input:focus, .form-fields textarea:focus, .form-fields select:focus { border-color: var(--pink); }
+.save-memory { margin-top: 5px; }
+.storage-note { color: #bcb1d0; font: 10px/1.6 Arial,sans-serif; margin: 3px 0 0; }
+.saved-memories {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.empty-memories {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  text-align: center;
+  font: italic 14px/1.7 Georgia,serif;
+  padding: 18px 8px;
+}
+.saved-memory {
+  overflow: hidden;
+  border-radius: 17px;
+  border: 1px solid rgba(243,201,232,.2);
+  background: rgba(255,255,255,.06);
+}
+.saved-memory img { display: block; width: 100%; max-height: 240px; object-fit: cover; }
+.saved-memory-body { padding: 14px; }
+.saved-memory-date { color: var(--lavender); font: 10px Arial,sans-serif; }
+.saved-memory-body p { color: var(--muted); font: 13px/1.6 Arial,sans-serif; white-space: pre-wrap; }
+.saved-memory-mood { color: var(--pink); font: 11px Arial,sans-serif; }
+.remove-memory {
+  margin-top: 10px;
+  border: 0;
+  background: none;
+  color: #d7b6d4;
+  text-decoration: underline;
+  cursor: pointer;
+  font: 11px Arial,sans-serif;
+}
+.final-footer { padding: 45px 22px 55px; }
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #bcb1d0;
+  font: 11px Arial,sans-serif;
+  padding: 36px 16px 45px;
+  letter-spacing: .06em;
+}
+.footer-heart { color: var(--pink); font-size: 30px; margin-bottom: 12px; }
+.footer-declaration {
+  max-width: 490px;
+  margin: 0 auto 13px;
+  color: #f5dff0;
+  font: italic 17px/1.7 Georgia,serif;
+  letter-spacing: 0;
+}
+.final-footer span { color: #bcb1d0; font: 10px Arial,sans-serif; letter-spacing: .08em; }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      color: var(--cream);
-      background:
-        radial-gradient(ellipse at 18% 8%, rgba(166, 126, 211, .38), transparent 36%),
-        radial-gradient(ellipse at 88% 38%, rgba(199, 128, 184, .22), transparent 34%),
-        radial-gradient(ellipse at 50% 100%, rgba(105, 83, 157, .24), transparent 42%),
-        var(--night);
-      font-family: Georgia, "Times New Roman", serif;
-      min-height: 100vh;
-    }
-
-    button, a { font: inherit; }
-
-    .stars, .stars::before, .stars::after {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      content: "";
-      background-image:
-        radial-gradient(2px 2px at 12% 18%, #fff 50%, transparent 60%),
-        radial-gradient(1px 1px at 35% 72%, #fff 50%, transparent 60%),
-        radial-gradient(2px 2px at 78% 26%, #f3c9e8 50%, transparent 60%),
-        radial-gradient(1px 1px at 88% 80%, #fff 50%, transparent 60%),
-        radial-gradient(1px 1px at 60% 54%, #c9b7f4 50%, transparent 60%);
-      background-size: 290px 260px;
-      opacity: .65;
-      animation: twinkle 5s ease-in-out infinite alternate;
-      z-index: 0;
-    }
-
-    .stars::before { transform: translate(40px, 30px); opacity: .35; }
-    .stars::after { transform: translate(-30px, 70px); opacity: .25; }
-
-    @keyframes twinkle {
-      from { opacity: .25; }
-      to { opacity: .8; }
-    }
-
-    header, main, footer { position: relative; z-index: 1; }
-
-    header {
-      display: flex;
-      justify-content: center;
-      padding: 22px 16px;
-    }
-
-    .brand {
-      color: var(--pink);
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      font: 11px Arial, sans-serif;
-    }
-
-    .hero {
-      min-height: 78vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 48px 22px 72px;
-    }
-
-    .hero-inner { max-width: 650px; }
-
-    .moon {
-      font-size: clamp(58px, 13vw, 92px);
-      display: block;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 0 22px rgba(226, 204, 255, .55));
-      animation: float 4s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .eyebrow {
-      color: var(--lavender);
-      text-transform: uppercase;
-      letter-spacing: .22em;
-      font: 10px Arial, sans-serif;
-    }
-
-    h1 {
-      font-size: clamp(40px, 10vw, 76px);
-      font-weight: normal;
-      line-height: 1.04;
-      margin: 14px 0;
-    }
-
-    h1 em { color: var(--pink); font-weight: normal; }
-
-    .intro {
-      color: var(--muted);
-      font: 15px/1.8 Arial, sans-serif;
-      max-width: 460px;
-      margin: 0 auto 28px;
-    }
-
-    .button {
-      border: 1px solid rgba(243, 201, 232, .65);
-      background: rgba(243, 201, 232, .12);
-      color: var(--cream);
-      border-radius: 999px;
-      padding: 13px 23px;
-      cursor: pointer;
-      transition: .25s ease;
-    }
-
-    .button:hover {
-      background: rgba(243, 201, 232, .24);
-      transform: translateY(-2px);
-    }
-
-    section {
-      width: min(850px, calc(100% - 36px));
-      margin: 0 auto;
-      padding: 62px 0;
-      scroll-margin-top: 20px;
-    }
-
-    .section-kicker {
-      color: var(--lavender);
-      text-transform: uppercase;
-      letter-spacing: .2em;
-      font: 10px Arial, sans-serif;
-      text-align: center;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: clamp(30px, 7vw, 43px);
-      font-weight: normal;
-      margin: 12px 0 28px;
-    }
-
-    .letter-card, .note-card {
-      background: linear-gradient(145deg, rgba(255,224,246,.13), rgba(201,183,244,.055));
-      border: 1px solid rgba(243, 201, 232, .28);
-      border-radius: 22px;
-      padding: clamp(22px, 6vw, 38px);
-      box-shadow: 0 18px 60px rgba(0,0,0,.15);
-      backdrop-filter: blur(8px);
-    }
-
-    .envelope {
-      display: block;
-      margin: 0 auto 18px;
-      font-size: 48px;
-      background: none;
-      border: 0;
-      cursor: pointer;
-      transition: transform .25s;
-    }
-
-    .envelope:hover { transform: rotate(-7deg) scale(1.08); }
-
-    .letter-text {
-      display: none;
-      color: #f3eaf8;
-      font: 15px/1.95 Arial, sans-serif;
-      text-align: left;
-      white-space: pre-line;
-    }
-
-    .letter-text.visible { display: block; animation: appear .6s ease; }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hint {
-      color: var(--muted);
-      text-align: center;
-      font: 13px Arial, sans-serif;
-    }
-
-    .memory-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .memory {
-      min-height: 150px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 20px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(220,202,255,.16);
-    }
-
-    .memory span { font-size: 30px; display: block; margin-bottom: 10px; }
-    .memory p { color: var(--muted); font: 13px/1.6 Arial, sans-serif; margin: 0; }
-
-    .sky {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .star-button {
-      min-height: 112px;
-      border: 1px solid rgba(220,202,255,.18);
-      border-radius: 18px;
-      background: rgba(255,255,255,.055);
-      color: var(--cream);
-      cursor: pointer;
-      padding: 14px 8px;
-      transition: .25s;
-    }
-
-    .star-button:hover {
-      background: rgba(201,183,244,.16);
-      transform: translateY(-3px);
-    }
-
-    .star-button strong { display: block; font-size: 28px; margin-bottom: 8px; }
-    .star-button small { color: var(--muted); font: 11px Arial, sans-serif; }
-
-    .reveal {
-      min-height: 54px;
-      text-align: center;
-      color: var(--pink);
-      font: italic 17px/1.6 Georgia, serif;
-      margin: 22px 0 0;
-    }
-
-    .playlist {
-      display: grid;
-      gap: 10px;
-    }
-
-    .song {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px 18px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.06);
-      color: var(--muted);
-      font: 13px Arial, sans-serif;
-    }
-
-    .song b { color: var(--cream); display: block; margin-bottom: 4px; }
-    .song-icon { font-size: 22px; }
-
-    footer {
-      text-align: center;
-      color: #bcb1d0;
-      font: 11px Arial, sans-serif;
-      padding: 36px 16px 45px;
-      letter-spacing: .06em;
-    }
-
-
-    .playlist-card {
-      display: grid;
-      grid-template-columns: minmax(130px, .8fr) 1.2fr;
-      gap: 22px;
-      align-items: center;
-      padding: 22px;
-      border-radius: 22px;
-      border: 1px solid rgba(243,201,232,.25);
-      background: linear-gradient(135deg, rgba(201,183,244,.15), rgba(243,201,232,.07));
-    }
-
-    .playlist-art {
-      min-height: 190px;
-      border-radius: 17px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,.28), transparent 28%),
-        linear-gradient(145deg, #9d82c9, #5e4b83 58%, #302747);
-      box-shadow: inset 0 0 30px rgba(255,255,255,.12);
-    }
-
-    .playlist-art span { font-size: 66px; color: #fff1fb; text-shadow: 0 0 25px #f3c9e8; }
-    .playlist-art i, .playlist-art b { position: absolute; color: #fce4f5; font-style: normal; }
-    .playlist-art i { top: 18px; left: 20px; font-size: 23px; }
-    .playlist-art b { right: 20px; bottom: 15px; font-size: 28px; }
-
-    .playlist-overline {
-      color: var(--lavender);
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      font: 10px Arial, sans-serif;
-    }
-
-    .playlist-info h3 { font-size: 28px; font-weight: normal; margin: 8px 0; }
-    .playlist-info > p:not(.playlist-overline):not(.playlist-help) {
-      color: var(--muted);
-      font: 13px/1.7 Arial, sans-serif;
-      margin-bottom: 18px;
-    }
-
-    .playlist-link { display: inline-block; text-decoration: none; font: 13px Arial, sans-serif; }
-    .playlist-link[aria-disabled="true"] { opacity: .7; }
-    .playlist-help { color: #bcb1d0; font: 11px/1.6 Arial, sans-serif; margin: 12px 0 0; }
-
-    .memories-section { padding-bottom: 76px; }
-    .memories-intro { max-width: 470px; margin: -10px auto 24px; line-height: 1.7; }
-
-    .memory-form {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 20px;
-      padding: 20px;
-      border-radius: 22px;
-      border: 1px solid rgba(243,201,232,.24);
-      background: rgba(255,255,255,.055);
-    }
-
-    .upload-label {
-      min-height: 230px;
-      border: 1px dashed rgba(243,201,232,.5);
-      border-radius: 17px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      text-align: center;
-      cursor: pointer;
-      color: var(--cream);
-      background: rgba(243,201,232,.045);
-      padding: 15px;
-    }
-
-    .upload-label:hover { background: rgba(243,201,232,.1); }
-    .upload-symbol { font: 36px Arial, sans-serif; color: var(--pink); }
-    .upload-label strong { font-size: 15px; font-weight: normal; }
-    .upload-label small { color: var(--muted); font: 11px Arial, sans-serif; }
-    .form-fields { display: flex; flex-direction: column; gap: 8px; }
-    .form-fields label { color: var(--lavender); font: 11px Arial, sans-serif; margin-top: 3px; }
-
-    .form-fields input, .form-fields textarea, .form-fields select {
-      width: 100%;
-      border: 1px solid rgba(220,202,255,.2);
-      border-radius: 11px;
-      background: rgba(15,12,31,.5);
-      color: var(--cream);
-      padding: 11px 12px;
-      font: 13px Arial, sans-serif;
-      outline: none;
-    }
-
-    .form-fields textarea { resize: vertical; }
-    .form-fields input:focus, .form-fields textarea:focus, .form-fields select:focus {
-      border-color: var(--pink);
-    }
-
-    .save-memory { margin-top: 5px; }
-    .storage-note { color: #bcb1d0; font: 10px/1.6 Arial, sans-serif; margin: 3px 0 0; }
-
-    .saved-memories {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 20px;
-    }
-
-    .empty-memories {
-      grid-column: 1 / -1;
-      color: var(--muted);
-      text-align: center;
-      font: italic 14px/1.7 Georgia, serif;
-      padding: 18px 8px;
-    }
-
-    .saved-memory {
-      overflow: hidden;
-      border-radius: 17px;
-      border: 1px solid rgba(243,201,232,.2);
-      background: rgba(255,255,255,.06);
-    }
-
-    .saved-memory img { display: block; width: 100%; max-height: 240px; object-fit: cover; }
-    .saved-memory-body { padding: 14px; }
-    .saved-memory-date { color: var(--lavender); font: 10px Arial, sans-serif; }
-    .saved-memory-body p { color: var(--muted); font: 13px/1.6 Arial, sans-serif; white-space: pre-wrap; }
-    .saved-memory-mood { color: var(--pink); font: 11px Arial, sans-serif; }
-    .remove-memory {
-      margin-top: 10px;
-      border: 0;
-      background: none;
-      color: #d7b6d4;
-      text-decoration: underline;
-      cursor: pointer;
-      font: 11px Arial, sans-serif;
-    }
-
-    .final-footer { padding: 45px 22px 55px; }
-    .footer-heart { color: var(--pink); font-size: 30px; margin-bottom: 12px; }
-    .footer-declaration {
-      max-width: 490px;
-      margin: 0 auto 13px;
-      color: #f5dff0;
-      font: italic 17px/1.7 Georgia, serif;
-      letter-spacing: 0;
-    }
-    .final-footer span { color: #bcb1d0; font: 10px Arial, sans-serif; letter-spacing: .08em; }
-
-    @media (max-width: 520px) {
-      .hero { min-height: 72vh; }
-      .playlist-card { grid-template-columns: 1fr; }
-      .playlist-art { min-height: 155px; }
-      .memory-form { grid-template-columns: 1fr; }
-      .upload-label { min-height: 145px; }
-      .saved-memories { grid-template-columns: 1fr; }
-      .memory-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
-      .memory { min-height: 135px; padding: 13px 9px; }
-      .sky { gap: 8px; }
-      .star-button { min-height: 102px; }
-      section { padding: 48px 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+@media (max-width:520px) {
+  .hero { min-height: 72vh; }
+  .playlist-card, .memory-form { grid-template-columns: 1fr; }
+  .playlist-art { min-height: 155px; }
+  .upload-label { min-height: 145px; }
+  .saved-memories { grid-template-columns: 1fr; }
+  .memory-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .memory { min-height: 135px; padding: 13px 9px; }
+  .sky { gap: 8px; }
+  .star-button { min-height: 102px; }
+  section { padding: 48px 0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="stars" aria-hidden="true"></div>
+<div class="stars" aria-hidden="true"></div>
 
-  <header>
-    <div class="brand">✦ our little universe ✦</div>
-  </header>
+<header>
+  <div class="brand">✦ our little universe ✦</div>
+</header>
 
-  <main>
-    <section class="hero" id="inicio">
-      <div class="hero-inner">
-        <span class="moon" aria-hidden="true">☾</span>
-        <div class="eyebrow">um universo que fiz pensando em você</div>
-        <h1>Para alguém<br>que faz meu mundo <em>florescer.</em></h1>
-        <p class="intro">
-          Você já sabe que este cantinho é seu. Só queria encontrar um jeito
-          bonito de guardar um pouquinho do carinho que sinto por você.
-        </p>
-        <button class="button" onclick="document.querySelector('#carta').scrollIntoView({behavior:'smooth'})">
-          Entre, tem uma cartinha ✧
-        </button>
-      </div>
-    </section>
+<main>
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <span class="moon" aria-hidden="true">☾</span>
+    <div class="eyebrow">um universo que fiz pensando em você</div>
+    <h1>Para alguém<br>que faz meu mundo <em>florescer.</em></h1>
+    <p class="intro">
+      Você já sabe que este cantinho é seu. Só queria encontrar um jeito
+      bonito de guardar um pouquinho do carinho que sinto por você.
+    </p>
+    <button class="button" onclick="document.querySelector('#carta').scrollIntoView({behavior:'smooth'})">
+      Entre, tem uma cartinha ✧
+    </button>
+  </div>
+</section>
 
-    <section id="carta">
-      <div class="section-kicker">01 · uma pequena mensagem</div>
-      <h2>Para você, com carinho</h2>
-      <div class="letter-card">
-        <button class="envelope" id="openLetter" aria-label="Abrir a cartinha">💌</button>
-        <p class="hint" id="letterHint">Toque no envelope para abrir.</p>
-        <div class="letter-text" id="letterText">
-          Oi, meu bem! ♡
+<section id="carta">
+  <div class="section-kicker">01 · uma pequena mensagem</div>
+  <h2>Para você, com carinho</h2>
+  <div class="letter-card">
+    <button class="envelope" id="openLetter" aria-label="Abrir a cartinha">💌</button>
+    <p class="hint" id="letterHint">Toque no envelope para abrir.</p>
+    <div class="letter-text" id="letterText">
+Oi, meu bem! ♡
 
-          Eu queria criar alguma coisa que fosse um pouquinho diferente.
-          Não precisava de grandes motivos ou de muitas palavras:
-          só queria guardar aqui algumas coisas bonitas que me fazem lembrar de você.
+Eu queria criar alguma coisa que fosse um pouquinho diferente.
+Não precisava de grandes motivos ou de muitas palavras:
+só queria guardar aqui algumas coisas bonitas que me fazem lembrar de você.
 
-          E, depois de tanta delicadeza, acho justo contar o principal:
-          eu gosto muito de você. Gosto do jeito que você faz meus dias
-          ficarem mais especiais, da vontade que tenho de compartilhar
-          pequenas coisas com você e de como até imaginar momentos ao seu
-          lado já me deixa feliz. Talvez eu ainda não saiba colocar tudo
-          o que sinto em palavras, mas sei que existe um carinho enorme aqui.
+E, depois de tanta delicadeza, acho justo contar o principal:
+eu gosto muito de você. Gosto do jeito que você faz meus dias
+ficarem mais especiais, da vontade que tenho de compartilhar
+pequenas coisas com você e de como até imaginar momentos
+ao seu lado já me deixa feliz. Talvez eu ainda não saiba colocar
+tudo o que sinto em palavras, mas sei que existe um carinho enorme aqui.
 
-          Também fico imaginando as coisas simples que a gente poderia viver:
-          estudar juntas, reclamar de uma matéria e depois comemorar quando
-          entendermos tudo; fazer um intercâmbio, conhecer lugares novos,
-          passar na faculdade, nos formar e tirar mil fotos desse dia.
-          Quem sabe um dia até conhecer Oxford, morar juntas e construir
-          um cantinho com a nossa cara?
+Também fico imaginando as coisas simples que a gente poderia viver:
+estudar juntas, reclamar de uma matéria e depois comemorar quando
+entendermos tudo; fazer um intercâmbio, conhecer lugares novos,
+passar na faculdade, nos formar e tirar mil fotos desse dia.
+Quem sabe um dia até conhecer Oxford, morar juntas e construir
+um cantinho com a nossa cara?
 
-          Quero as aventuras grandes, mas também as pequenas lembranças:
-          tardes de filme, passeios sem planejamento, cozinhar alguma coisa,
-          conversas que começam sobre um assunto e terminam em outro,
-          apoio nos dias difíceis e comemorações pelas conquistas uma da outra.
+Quero as aventuras grandes, mas também as pequenas lembranças:
+tardes de filme, passeios sem planejamento, cozinhar alguma coisa,
+conversas que começam sobre um assunto e terminam em outro,
+apoio nos dias difíceis e comemorações pelas conquistas uma da outra.
 
-          Não sei exatamente o que o futuro guarda para nós — e acho bonito
-          pensar que ele ainda pode surpreender a gente de tantas formas.
-          Espero que, no futuro, possamos viver tudo isso e muito mais,
-          no nosso tempo, do nosso jeitinho. Que a vida nos dê muitas
-          oportunidades de criar lembranças felizes.
+Não sei exatamente o que o futuro guarda para nós — e acho bonito
+pensar que ele ainda pode surpreender a gente de tantas formas.
+Espero que, no futuro, possamos viver tudo isso e muito mais,
+no nosso tempo, do nosso jeitinho. Que a vida nos dê muitas
+oportunidades de criar lembranças felizes.
 
-          Por enquanto, queria que você soubesse que é especial para mim.
-          Este site é só um pedacinho do carinho que tenho por você.
+Por enquanto, queria que você soubesse que é especial para mim.
+Este site é só um pedacinho do carinho que tenho por você.
 
-          Com muito carinho,
-          alguém que está feliz por ter você na vida. ✨
-        </div>
-      </div>
-    </section>
+Com muito carinho,
+alguém que está feliz por ter você na vida. ✨
+    </div>
+  </div>
+</section>
 
-    <section id="detalhes">
-      <div class="section-kicker">02 · pequenos detalhes</div>
-      <h2>Coisas que têm sua magia</h2>
-      <div class="memory-grid">
-        <div class="memory"><div><span>🦋</span><p>Leveza para transformar um dia comum.</p></div></div>
-        <div class="memory"><div><span>🌷</span><p>Beleza nas coisas mais simples.</p></div></div>
-        <div class="memory"><div><span>☁️</span><p>Uma lembrança boa no meio da rotina.</p></div></div>
-        <div class="memory"><div><span>✨</span><p>Um brilho que não precisa fazer esforço.</p></div></div>
-      </div>
-    </section>
+<section id="detalhes">
+  <div class="section-kicker">02 · pequenos detalhes</div>
+  <h2>Coisas que têm sua magia</h2>
+  <div class="memory-grid">
+    <div class="memory"><div><span>🦋</span><p>Leveza para transformar um dia comum.</p></div></div>
+    <div class="memory"><div><span>🌷</span><p>Beleza nas coisas mais simples.</p></div></div>
+    <div class="memory"><div><span>☁️</span><p>Uma lembrança boa no meio da rotina.</p></div></div>
+    <div class="memory"><div><span>✨</span><p>Um brilho que não precisa fazer esforço.</p></div></div>
+  </div>
+</section>
 
-    <section id="universo">
-      <div class="section-kicker">03 · nosso céu</div>
-      <h2>Escolha uma estrela</h2>
-      <p class="hint">Cada estrelinha guarda uma mensagem.</p>
-      <div class="sky">
-        <button class="star-button" data-message="Você merece dias tranquilos e motivos sinceros para sorrir."><strong>✦</strong><small>Estrela da calma</small></button>
-        <button class="star-button" data-message="Que nunca faltem pequenas coisas para descobrir e motivos para se encantar."><strong>✧</strong><small>Estrela da magia</small></button>
-        <button class="star-button" data-message="Sua presença pode tornar um momento simples em uma lembrança especial."><strong>⋆</strong><small>Estrela do carinho</small></button>
-      </div>
-      <p class="reveal" id="starMessage" aria-live="polite"></p>
-    </section>
+<section id="universo">
+  <div class="section-kicker">03 · nosso céu</div>
+  <h2>Escolha uma estrela</h2>
+  <p class="hint">Cada estrelinha guarda uma mensagem.</p>
+  <div class="sky">
+    <button class="star-button" data-message="Você merece dias tranquilos e motivos sinceros para sorrir."><strong>✦</strong><small>Estrela da calma</small></button>
+    <button class="star-button" data-message="Que nunca faltem pequenas coisas para descobrir e motivos para se encantar."><strong>✧</strong><small>Estrela da magia</small></button>
+    <button class="star-button" data-message="Sua presença pode tornar um momento simples em uma lembrança especial."><strong>⋆</strong><small>Estrela do carinho</small></button>
+  </div>
+  <p class="reveal" id="starMessage" aria-live="polite"></p>
+</section>
 
-    <section id="playlist">
-      <div class="section-kicker">04 · feita pensando em você</div>
-      <h2>A nossa trilha sonora</h2>
-      <div class="playlist-card">
-        <div class="playlist-art" aria-hidden="true">
-          <span>♫</span>
-          <i>✦</i><b>♡</b>
-        </div>
-        <div class="playlist-info">
-          <p class="playlist-overline">uma playlist especial</p>
-          <h3> songs for you </h3>
-          <p>Uma coleção de músicas escolhidas com carinho, porque algumas canções conseguem dizer o que às vezes as palavras não alcançam.</p>
-          <a class="button playlist-link" id="playlistLink" href="#" target="_blank" rel="noopener" aria-disabled="true">Adicionar link da playlist ♡</a>
-          <p class="playlist-help">Para personalizar: coloque o link da sua playlist no campo <code>PLAYLIST_URL</code> no final deste arquivo.</p>
-        </div>
-      </div>
-    </section>
+<section id="playlist">
+  <div class="section-kicker">04 · feita pensando em você</div>
+  <h2>A nossa trilha sonora</h2>
+  <div class="playlist-card">
+    <div class="playlist-art" aria-hidden="true">
+      <span>♫</span><i>✦</i><b>♡</b>
+    </div>
+    <div class="playlist-info">
+      <p class="playlist-overline">uma playlist especial</p>
+      <h3>songs for you</h3>
+      <p>Uma coleção de músicas escolhidas com carinho, porque algumas canções conseguem dizer o que às vezes as palavras não alcançam.</p>
+      <a class="button playlist-link"
+         href="https://open.spotify.com/playlist/6nOVljucHQ7ePjZzVji5qn"
+         target="_blank" rel="noopener noreferrer">
+        Ouvir nossa playlist ♫
+      </a>
+    </div>
+  </div>
 
-    <section id="someday">
-      <div class="section-kicker">05 · talvez um dia</div>
-      <h2>Pequenos planos bonitos</h2>
-      <div class="note-card">
-        <div class="memory-grid">
-          <div class="memory"><div><span>📚</span><p>Estudar juntas e comemorar cada matéria vencida.</p></div></div>
-          <div class="memory"><div><span>✈️</span><p>Fazer um intercâmbio e descobrir o mundo.</p></div></div>
-          <div class="memory"><div><span>🎓</span><p>Passar na faculdade e nos formar.</p></div></div>
-          <div class="memory"><div><span>🏛️</span><p>Quem sabe conhecer Oxford um dia?</p></div></div>
-          <div class="memory"><div><span>🏡</span><p>Talvez morar juntas e montar nosso cantinho.</p></div></div>
-          <div class="memory"><div><span>📸</span><p>Guardar muitas lembranças, das simples às inesquecíveis.</p></div></div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <iframe
+    class="spotify-embed"
+    src="https://open.spotify.com/embed/playlist/6nOVljucHQ7ePjZzVji5qn?utm_source=generator"
+    width="100%" height="352"
+    frameborder="0"
+    allowfullscreen
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+    title="Nossa playlist no Spotify">
+  </iframe>
+</section>
 
-    <section id="memorias" class="memories-section">
-      <div class="section-kicker">06 · nosso pequeno diário</div>
-      <h2>Memórias para guardar</h2>
-      <p class="hint memories-intro">Um lugar para guardar momentos especiais: uma foto, uma data, uma legenda e como foi aquele dia. ♡</p>
+<section id="someday">
+  <div class="section-kicker">05 · talvez um dia</div>
+  <h2>Pequenos planos bonitos</h2>
+  <div class="note-card">
+    <div class="memory-grid">
+      <div class="memory"><div><span>📚</span><p>Estudar juntas e comemorar cada matéria vencida.</p></div></div>
+      <div class="memory"><div><span>✈️</span><p>Fazer um intercâmbio e descobrir o mundo.</p></div></div>
+      <div class="memory"><div><span>🎓</span><p>Passar na faculdade e nos formar.</p></div></div>
+      <div class="memory"><div><span>🏛️</span><p>Quem sabe conhecer Oxford um dia?</p></div></div>
+      <div class="memory"><div><span>🏡</span><p>Talvez morar juntas e montar nosso cantinho.</p></div></div>
+      <div class="memory"><div><span>📸</span><p>Guardar muitas lembranças, das simples às inesquecíveis.</p></div></div>
+    </div>
+  </div>
+</section>
 
-      <div class="memory-form">
-        <label class="upload-label" for="memoryPhoto">
-          <span class="upload-symbol">＋</span>
-          <strong>Escolher uma foto</strong>
-          <small>Uma lembrança de vocês</small>
-        </label>
-        <input id="memoryPhoto" type="file" accept="image/*" hidden>
+<section id="memorias" class="memories-section">
+  <div class="section-kicker">06 · nosso pequeno diário</div>
+  <h2>Memórias para guardar</h2>
+  <p class="hint memories-intro">Um lugar para guardar momentos especiais: uma foto, uma data, uma legenda e como foi aquele dia. ♡</p>
 
-        <div class="form-fields">
-          <label for="memoryDate">Data</label>
-          <input id="memoryDate" type="date">
-          <label for="memoryDescription">O que aconteceu?</label>
-          <textarea id="memoryDescription" rows="3" placeholder="Escreva um pouquinho sobre essa lembrança..."></textarea>
-          <label for="memoryMood">Qual era o humor desse momento?</label>
-          <select id="memoryMood">
-            <option value="🥰 Feliz">🥰 Feliz</option>
-            <option value="😂 Engraçado">😂 Engraçado</option>
-            <option value="🦋 Borboletas na barriga">🦋 Borboletas na barriga</option>
-            <option value="🌷 Tranquilo">🌷 Tranquilo</option>
-            <option value="✨ Inesquecível">✨ Inesquecível</option>
-            <option value="💗 Cheio de carinho">💗 Cheio de carinho</option>
-          </select>
-          <button class="button save-memory" id="saveMemory">Guardar memória ✧</button>
-          <p class="storage-note">As memórias ficam salvas neste navegador e neste aparelho. Para compartilhar as mesmas memórias entre vocês, será necessário conectar o site a um serviço de armazenamento online.</p>
-        </div>
-      </div>
+  <div class="memory-form">
+    <label class="upload-label" for="memoryPhoto">
+      <span class="upload-symbol">＋</span>
+      <strong>Escolher uma foto</strong>
+      <small>Uma lembrança de vocês</small>
+    </label>
+    <input id="memoryPhoto" type="file" accept="image/*" hidden>
 
-      <div class="saved-memories" id="savedMemories" aria-live="polite">
-        <p class="empty-memories" id="emptyMemories">As próximas páginas da história ainda estão esperando para ser preenchidas. ♡</p>
-      </div>
-    </section>
+    <div class="form-fields">
+      <label for="memoryDate">Data</label>
+      <input id="memoryDate" type="date">
 
-  <footer class="final-footer">
-    <div class="footer-heart">♡</div>
-    <p class="footer-declaration">Se o futuro permitir, que a gente ainda colecione muitos dias felizes, sonhos realizados e lembranças bonitas.</p>
-    <span>com carinho, hoje e em todos os amanhãs possíveis ✦</span>
-  </footer>
+      <label for="memoryDescription">O que aconteceu?</label>
+      <textarea id="memoryDescription" rows="3" placeholder="Escreva um pouquinho sobre essa lembrança..."></textarea>
 
-  <script>
-    const openLetter = document.getElementById("openLetter");
-    const letterText = document.getElementById("letterText");
-    const letterHint = document.getElementById("letterHint");
+      <label for="memoryMood">Qual era o humor desse momento?</label>
+      <select id="memoryMood">
+        <option value="🥰 Feliz">🥰 Feliz</option>
+        <option value="😂 Engraçado">😂 Engraçado</option>
+        <option value="🦋 Borboletas na barriga">🦋 Borboletas na barriga</option>
+        <option value="🌷 Tranquilo">🌷 Tranquilo</option>
+        <option value="✨ Inesquecível">✨ Inesquecível</option>
+        <option value="💗 Cheio de carinho">💗 Cheio de carinho</option>
+      </select>
 
-    openLetter.addEventListener("click", () => {
-      letterText.classList.toggle("visible");
-      const isOpen = letterText.classList.contains("visible");
-      letterHint.textContent = isOpen ? "Uma mensagem só para você ♡" : "Toque no envelope para abrir.";
-      openLetter.textContent = isOpen ? "💗" : "💌";
-    });
+      <button class="button save-memory" id="saveMemory">Guardar memória ✧</button>
+      <p class="storage-note">As memórias ficam salvas neste navegador e neste aparelho. Para compartilhar as mesmas memórias entre vocês, será necessário conectar o site a um serviço de armazenamento online.</p>
+    </div>
+  </div>
 
-    document.querySelectorAll(".star-button").forEach((star) => {
-      star.addEventListener("click", () => {
-        document.getElementById("starMessage").textContent = star.dataset.message;
-      });
-    });
+  <div class="saved-memories" id="savedMemories" aria-live="polite">
+    <p class="empty-memories" id="emptyMemories">As próximas páginas da história ainda estão esperando para ser preenchidas. ♡</p>
+  </div>
+</section>
+</main>
 
-    <iframe
-  class="spotify-embed"
-  src="https://open.spotify.com/embed/playlist/6nOVljucHQ7ePjZzVji5qn?utm_source=generator"
-  width="100%"
-  height="352"
-  frameborder="0"
-  allowfullscreen
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  loading="lazy"
-  title="Nossa playlist no Spotify">
-</iframe>
+<footer class="final-footer">
+  <div class="footer-heart">♡</div>
+  <p class="footer-declaration">Se o futuro permitir, que a gente ainda colecione muitos dias felizes, sonhos realizados e lembranças bonitas.</p>
+  <span>com carinho, hoje e em todos os amanhãs possíveis ✦</span>
+</footer>
 
-<a class="button playlist-link"
-   href="https://open.spotify.com/playlist/6nOVljucHQ7ePjZzVji5qn"
-   target="_blank"
-   rel="noopener noreferrer">
-   Ouvir nossa playlist ♫
-</a>
+<script>
+const openLetter = document.getElementById("openLetter");
+const letterText = document.getElementById("letterText");
+const letterHint = document.getElementById("letterHint");
 
-    const photoInput = document.getElementById("memoryPhoto");
-    const dateInput = document.getElementById("memoryDate");
-    const descriptionInput = document.getElementById("memoryDescription");
-    const moodInput = document.getElementById("memoryMood");
-    const saveMemoryButton = document.getElementById("saveMemory");
-    const memoriesContainer = document.getElementById("savedMemories");
-    const emptyMemories = document.getElementById("emptyMemories");
-    let selectedPhotoData = "";
+openLetter.addEventListener("click", () => {
+  letterText.classList.toggle("visible");
+  const isOpen = letterText.classList.contains("visible");
+  letterHint.textContent = isOpen
+    ? "Uma mensagem só para você ♡"
+    : "Toque no envelope para abrir.";
+  openLetter.textContent = isOpen ? "💗" : "💌";
+});
 
-    photoInput.addEventListener("change", () => {
-      const file = photoInput.files && photoInput.files[0];
-      if (!file) {
-        selectedPhotoData = "";
-        return;
-      }
-      if (!file.type.startsWith("image/")) {
-        alert("Escolha um arquivo de imagem.");
-        photoInput.value = "";
-        return;
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Escolha uma foto de até 2 MB para não ocupar muito espaço.");
-        photoInput.value = "";
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = () => { selectedPhotoData = String(reader.result || ""); };
-      reader.readAsDataURL(file);
-    });
+document.querySelectorAll(".star-button").forEach((star) => {
+  star.addEventListener("click", () => {
+    document.getElementById("starMessage").textContent = star.dataset.message;
+  });
+});
 
-    function loadMemories() {
-      try {
-        return JSON.parse(localStorage.getItem("ourLittleUniverseMemories") || "[]");
-      } catch {
-        return [];
-      }
+const photoInput = document.getElementById("memoryPhoto");
+const dateInput = document.getElementById("memoryDate");
+const descriptionInput = document.getElementById("memoryDescription");
+const moodInput = document.getElementById("memoryMood");
+const saveMemoryButton = document.getElementById("saveMemory");
+const memoriesContainer = document.getElementById("savedMemories");
+const emptyMemories = document.getElementById("emptyMemories");
+
+let selectedPhotoData = "";
+
+photoInput.addEventListener("change", () => {
+  const file = photoInput.files && photoInput.files[0];
+
+  if (!file) {
+    selectedPhotoData = "";
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    alert("Escolha um arquivo de imagem.");
+    photoInput.value = "";
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Escolha uma foto de até 2 MB para não ocupar muito espaço.");
+    photoInput.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    selectedPhotoData = String(reader.result || "");
+  };
+
+  reader.readAsDataURL(file);
+});
+
+function loadMemories() {
+  try {
+    return JSON.parse(
+      localStorage.getItem("ourLittleUniverseMemories") || "[]"
+    );
+  } catch {
+    return [];
+  }
+}
+
+function saveMemories(memories) {
+  try {
+    localStorage.setItem(
+      "ourLittleUniverseMemories",
+      JSON.stringify(memories)
+    );
+    return true;
+  } catch {
+    alert("O navegador não conseguiu guardar esta memória. Tente uma foto menor ou remova algumas memórias antigas.");
+    return false;
+  }
+}
+
+function renderMemories() {
+  const memories = loadMemories();
+  memoriesContainer.innerHTML = "";
+
+  if (!memories.length) {
+    memoriesContainer.appendChild(emptyMemories);
+    return;
+  }
+
+  memories.forEach((memory, index) => {
+    const card = document.createElement("article");
+    card.className = "saved-memory";
+
+    if (memory.photo) {
+      const img = document.createElement("img");
+      img.src = memory.photo;
+      img.alt = "Foto de uma memória";
+      card.appendChild(img);
     }
 
-    function saveMemories(memories) {
-      try {
-        localStorage.setItem("ourLittleUniverseMemories", JSON.stringify(memories));
-        return true;
-      } catch {
-        alert("O navegador não conseguiu guardar esta memória. Tente uma foto menor ou remova algumas memórias antigas.");
-        return false;
-      }
-    }
+    const body = document.createElement("div");
+    body.className = "saved-memory-body";
 
-    function renderMemories() {
-      const memories = loadMemories();
-      memoriesContainer.innerHTML = "";
-      if (!memories.length) {
-        memoriesContainer.appendChild(emptyMemories);
-        return;
-      }
-      memories.forEach((memory, index) => {
-        const card = document.createElement("article");
-        card.className = "saved-memory";
-        if (memory.photo) {
-          const img = document.createElement("img");
-          img.src = memory.photo;
-          img.alt = "Foto de uma memória";
-          card.appendChild(img);
-        }
-        const body = document.createElement("div");
-        body.className = "saved-memory-body";
-        const date = document.createElement("div");
-        date.className = "saved-memory-date";
-        date.textContent = memory.date || "Uma data especial";
-        const description = document.createElement("p");
-        description.textContent = memory.description;
-        const mood = document.createElement("div");
-        mood.className = "saved-memory-mood";
-        mood.textContent = memory.mood;
-        const remove = document.createElement("button");
-        remove.className = "remove-memory";
-        remove.textContent = "Apagar esta memória";
-        remove.addEventListener("click", () => {
-          const updated = loadMemories();
-          updated.splice(index, 1);
-          if (saveMemories(updated)) renderMemories();
-        });
-        body.append(date, description, mood, remove);
-        card.appendChild(body);
-        memoriesContainer.appendChild(card);
-      });
-    }
+    const date = document.createElement("div");
+    date.className = "saved-memory-date";
+    date.textContent = memory.date || "Uma data especial";
 
-    saveMemoryButton.addEventListener("click", () => {
-      const description = descriptionInput.value.trim();
-      if (!description) {
-        alert("Escreva uma pequena descrição para esta memória.");
-        descriptionInput.focus();
-        return;
-      }
-      const memories = loadMemories();
-      memories.unshift({
-        photo: selectedPhotoData,
-        date: dateInput.value,
-        description,
-        mood: moodInput.value
-      });
-      if (saveMemories(memories)) {
-        descriptionInput.value = "";
-        dateInput.value = "";
-        moodInput.value = "🥰 Feliz";
-        photoInput.value = "";
-        selectedPhotoData = "";
+    const description = document.createElement("p");
+    description.textContent = memory.description;
+
+    const mood = document.createElement("div");
+    mood.className = "saved-memory-mood";
+    mood.textContent = memory.mood;
+
+    const remove = document.createElement("button");
+    remove.className = "remove-memory";
+    remove.textContent = "Apagar esta memória";
+
+    remove.addEventListener("click", () => {
+      const updated = loadMemories();
+      updated.splice(index, 1);
+
+      if (saveMemories(updated)) {
         renderMemories();
       }
     });
 
+    body.append(date, description, mood, remove);
+    card.appendChild(body);
+    memoriesContainer.appendChild(card);
+  });
+}
+
+saveMemoryButton.addEventListener("click", () => {
+  const description = descriptionInput.value.trim();
+
+  if (!description) {
+    alert("Escreva uma pequena descrição para esta memória.");
+    descriptionInput.focus();
+    return;
+  }
+
+  const memories = loadMemories();
+
+  memories.unshift({
+    photo: selectedPhotoData,
+    date: dateInput.value,
+    description,
+    mood: moodInput.value
+  });
+
+  if (saveMemories(memories)) {
+    descriptionInput.value = "";
+    dateInput.value = "";
+    moodInput.value = "🥰 Feliz";
+    photoInput.value = "";
+    selectedPhotoData = "";
     renderMemories();
-  </script>
+  }
+});
+
+renderMemories();
+</script>
 </body>
 </html>
-
- 
