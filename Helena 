@@ -640,21 +640,24 @@
       });
     });
 
-    // Cole aqui o link público/compartilhável da sua playlist.
-    // Exemplo: https://open.spotify.com/playlist/...
-    const PLAYLIST_URL = "";
+    <iframe
+  class="spotify-embed"
+  src="https://open.spotify.com/embed/playlist/6nOVljucHQ7ePjZzVji5qn?utm_source=generator"
+  width="100%"
+  height="352"
+  frameborder="0"
+  allowfullscreen
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  loading="lazy"
+  title="Nossa playlist no Spotify">
+</iframe>
 
-    const playlistLink = document.getElementById("playlistLink");
-    if (PLAYLIST_URL.trim()) {
-      playlistLink.href = PLAYLIST_URL.trim();
-      playlistLink.textContent = "Ouvir nossa playlist ♫";
-      playlistLink.setAttribute("aria-disabled", "false");
-    } else {
-      playlistLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        alert("Adicione o link da sua playlist no campo PLAYLIST_URL, no final do arquivo HTML.");
-      });
-    }
+<a class="button playlist-link"
+   href="https://open.spotify.com/playlist/6nOVljucHQ7ePjZzVji5qn"
+   target="_blank"
+   rel="noopener noreferrer">
+   Ouvir nossa playlist ♫
+</a>
 
     const photoInput = document.getElementById("memoryPhoto");
     const dateInput = document.getElementById("memoryDate");
